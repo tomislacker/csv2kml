@@ -41,9 +41,9 @@ def get_comment(csv_name):
 
 def get_csv_doc(csv_path, index_name=None, index_lat=None, index_long=None,
                 altitude=0):
-    index_name = index_name or CSV_INDEX_NAME
-    index_lat = index_lat or CSV_INDEX_LAT
-    index_long = index_long or CSV_INDEX_LONG
+    index_name = int(index_name) or CSV_INDEX_NAME
+    index_lat = int(index_lat) or CSV_INDEX_LAT
+    index_long = int(index_long) or CSV_INDEX_LONG
 
     print "Indexes: {n}, {l}, {L}".format(
         n=index_name,
@@ -52,7 +52,7 @@ def get_csv_doc(csv_path, index_name=None, index_lat=None, index_long=None,
     )
     print "Reading from '{c}'".format(c=csv_path)
 
-    doc = KML.kml(
+    doc = KML.kml(KML.Document(
         KML.name("Property List"),
         etree.Comment(get_comment(csv_path)),
         KML.Style(
@@ -65,7 +65,7 @@ def get_csv_doc(csv_path, index_name=None, index_lat=None, index_long=None,
             ),
             id="pushpin"
         ),
-    )
+    ))
 
     with open(csv_path, 'r') as csvin:
         reader = csv.reader(csvin)
