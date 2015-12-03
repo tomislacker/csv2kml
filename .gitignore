@@ -76,3 +76,4 @@ share/
 
 # Ignore deb files
 *.deb
+/*.kml
